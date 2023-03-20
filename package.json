@@ -1,0 +1,27 @@
+{
+  "name": "labecommerce-backend",
+  "version": "1.0.0",
+  "description": "\"Projeto Labecommerce focado no desenvolvimento pessoal na área de backend\"",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevLucasTavares/labecommerce-backend.git"
+  },
+  "keywords": [
+    "labecommerce",
+    "ecommerce",
+    "backend",
+    "labenu"
+  ],
+  "author": "Lucas Carrarini Draeger Tavares",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DevLucasTavares/labecommerce-backend/issues"
+  },
+  "homepage": "https://github.com/DevLucasTavares/labecommerce-backend#readme"
+}
