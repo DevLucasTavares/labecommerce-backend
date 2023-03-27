@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "description": "\"Projeto Labecommerce focado no desenvolvimento pessoal na área de backend\"",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "tsc && node ./build/index.js"
   },
   "repository": {
     "type": "git",
@@ -23,5 +21,9 @@
   "bugs": {
     "url": "https://github.com/DevLucasTavares/labecommerce-backend/issues"
   },
-  "homepage": "https://github.com/DevLucasTavares/labecommerce-backend#readme"
+  "homepage": "https://github.com/DevLucasTavares/labecommerce-backend#readme",
+  "devDependencies": {
+    "@types/node": "^18.15.5",
+    "typescript": "^5.0.2"
+  }
 }
