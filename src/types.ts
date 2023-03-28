@@ -8,12 +8,23 @@ export type TProduct = {
   id: string;
   name: string;
   price: number;
-  category: string;
+  category: HARDWARE;
 };
 
 export type TPurchase = {
-    userId: string,
-    productId: string,
-    quantity: number,
-    totalPrice: number
+  userId: string;
+  productId: string;
+  quantity: number;
+  totalPrice: number;
 };
+
+export enum HARDWARE {
+  COOLER = "Cooler",
+  CPU = "Processador",
+  FONTE = "Fonte",
+  GRAPHICS_CARD = "Placa de Vídeo",
+  HD = "Disco Rígido (HD)",
+  MOBO = "Placa-mãe",
+  RAM = "Memória RAM",
+  SSD = "SSD",
+}
