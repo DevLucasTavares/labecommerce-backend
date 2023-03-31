@@ -41,6 +41,12 @@ export const purchases: TPurchase[] = [
     quantity: 3,
     totalPrice: calculator(3, 15),
   },
+  {
+    userId: checkId("u001"),
+    productId: checkId("p001"),
+    quantity: 1,
+    totalPrice: calculator(1, 10),
+  }
 ];
 
 ///////////////////////////////////////////////////////////////////////////////////
