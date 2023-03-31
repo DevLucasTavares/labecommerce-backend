@@ -36,6 +36,33 @@ app.post("/users", (req:Request, res:Response)=>{
     res.status(201).send("Cadastro realizado com sucesso")
 })
 
+app.delete("/users/:id",(req:Request, res:Response)=>{
+    const id = req.params.id
+    const userIndex = users.findIndex((user)=>user.id === id)
+
+    if (userIndex >= 0) {
+        users.splice(userIndex, 1)
+    }
+
+    res.status(200).send("User apagado com sucesso")
+})
+
+app.put("/users/:id", (req:Request, res:Response)=>{
+    const id = req.params.id
+
+    const newEmail = req.body.email as string | undefined
+    const newPassword = req.body.password as string | undefined
+
+    const user = users.find((user)=> user.id === id)
+
+    if (user) {
+        user.email = newEmail || user.email
+        user.password = newPassword || user.password
+    }
+
+    res.status(200).send("Cadastro atualizado com sucesso")
+})
+
 // PRODUCTS
 app.get("/products", (req:Request, res:Response)=>{
     res.status(200).send(products)
@@ -63,6 +90,46 @@ app.post("/products", (req:Request, res:Response)=>{
     res.status(201).send("´Produto cadastrado com sucesso")
 })
 
+app.get("/products/:id", (req:Request,res:Response)=>{
+    const id = req.params.id
+
+    const result = products.find((product)=> product.id === id)
+
+    res.status(200).send(result)
+})
+
+app.delete("/products/:id",(req:Request,res:Response)=>{
+    const id = req.params.id
+    const productIndex = products.findIndex((product)=>product.id === id)
+
+    if (productIndex >= 0) {
+        products.splice(productIndex, 1)
+    }
+
+    res.status(200).send("Produto apagado com sucesso")
+})
+
+app.put("/products/:id", (req:Request, res:Response)=>{
+    const id = req.params.id
+
+    const newName = req.body.name as string | undefined
+    const newPrice = req.body.price as number | undefined
+    const newCategory = req.body.category as HARDWARE | undefined
+
+    const product = products.find((product)=> product.id === id)
+
+    if (product){
+        product.name = newName || product.name
+        product.category = newCategory || product.category
+        if (newPrice !== undefined) {
+            product.price = isNaN(newPrice) ? product.price : newPrice
+        }
+    }
+
+    res.status(200).send("Produto atualizado com sucesso")
+
+})
+
 // PURCHASES
 app.post("/purchases", (req:Request, res:Response)=>{
     const userId = req.body.userId as string
@@ -76,4 +143,12 @@ app.post("/purchases", (req:Request, res:Response)=>{
 
     purchases.push(newPurchase)
     res.status(201).send("Compra realizada com sucesso")
+})
+
+app.get("/users/:id/purchases",(req:Request, res:Response)=>{
+    const id = req.params.id
+
+    const response = purchases.filter((purchase)=> purchase.userId.includes(id))
+
+    res.status(200).send(response)
 })
