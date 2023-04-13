@@ -77,6 +77,7 @@ ON users.id = buyer_id;
 
 
 
+
 -- GET ALL USERS
 SELECT * FROM users
 ORDER BY email ASC;
