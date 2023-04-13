@@ -3,12 +3,12 @@ import { HARDWARE, TProduct, TPurchase, TUser } from "./types";
 export const users: TUser[] = [
   {
     id: "u001",
-    email: "lucas.tavares@gmail.com",
+    email: "lucas.tavares@email.com",
     password: "21379",
   },
   {
     id: "u002",
-    email: "leticia.menezes@gmail.com",
+    email: "leticia.tavares@email.com",
     password: "18385",
   },
 ];
