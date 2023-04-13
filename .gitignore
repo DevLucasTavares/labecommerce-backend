@@ -1,6 +1,6 @@
 .DS_STORE
-*.db
-node_modules
+.db
+node_modules/
 scripts/flow/*/.flowconfig
 .flowconfig
 *~
