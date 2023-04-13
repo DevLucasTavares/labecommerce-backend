@@ -16,6 +16,7 @@ VALUES
 
 
 
+--------------------------------------------------------------------------------------------
 CREATE TABLE products (
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
     name TEXT NOT NULL,
@@ -37,6 +38,43 @@ VALUES
 ("p003", "i9", 3000, "Processador"),
 ("p004", "RTX 4080", 10000, "Placa de Vídeo"),
 ("p005", "RTX 3060", 3000, "Placa de Vídeo");
+
+
+
+--------------------------------------------------------------------------------------------
+CREATE TABLE purchases (
+    id TEXT PRIMARY KEY UNIQUE NOT NULL,
+    total_price REAL NOT NULL,
+    paid INTEGER NOT NULL,
+    delivered_at TEXT,
+    buyer_id TEXT NOT NULL,
+    FOREIGN KEY (buyer_id) REFERENCES users(id)
+);
+SELECT * FROM purchases;
+DROP TABLE purchases;
+
+INSERT INTO purchases (id, total_price, paid, buyer_id)
+VALUES 
+("s001", 100, 0, "u001"),
+("s002", 200, 0, "u001"),
+("s003", 600, 0, "u002"),
+("s004", 400, 0, "u002"),
+("s005", 900, 0, "u003"),
+("s006", 300, 0, "u003");
+
+UPDATE purchases
+SET delivered_at = DATETIME()
+WHERE buyer_id = "u001";
+
+SELECT * FROM users
+INNER JOIN purchases
+ON users.id = buyer_id;
+
+
+
+
+--------------------------------------------------------------------------------------------
+
 
 
 
