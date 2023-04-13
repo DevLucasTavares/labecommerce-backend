@@ -55,29 +55,58 @@ DROP TABLE purchases;
 
 INSERT INTO purchases (id, total_price, paid, buyer_id)
 VALUES 
-("s001", 100, 0, "u001"),
-("s002", 200, 0, "u001"),
-("s003", 600, 0, "u002"),
-("s004", 400, 0, "u002"),
-("s005", 900, 0, "u003"),
-("s006", 300, 0, "u003");
-
-UPDATE purchases
-SET delivered_at = DATETIME()
-WHERE buyer_id = "u001";
-
-SELECT * FROM users
-INNER JOIN purchases
-ON users.id = buyer_id;
-
+("c001", 100, 0, "u001"),
+("c002", 200, 0, "u001"),
+("c003", 600, 0, "u002"),
+("c004", 400, 0, "u002"),
+("c005", 900, 0, "u003"),
+("c006", 300, 0, "u003");
 
 
 
 --------------------------------------------------------------------------------------------
+CREATE TABLE purchases_products (
+    purchase_id TEXT NOT NULL,
+    product_id TEXT NOT NULL,
+    quantity INTEGER NOT NULL,
+    FOREIGN KEY (purchase_id) REFERENCES purchases(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+SELECT * FROM purchases_products;
+DROP TABLE purchases_products;
+
+INSERT INTO purchases_products (purchase_id, product_id, quantity)
+VALUES
+("c001", "p001", 2),
+("c001", "p004", 3),
+("c002", "p004", 1);
+
+SELECT 
+    products.name AS "Produto",
+    products.category AS "Categoria",
+    purchases_products.quantity AS "Qt",
+
+    purchases.id AS "ID da Compra",
+    purchases.buyer_id AS "ID do Usuário",
+    products.id AS "ID do Produto",
+
+    products.price AS "Valor Unitário",
+    purchases.total_price AS "Valor Total",
+    
+    purchases.paid,
+    purchases.delivered_at,
+    purchases_products.purchase_id,
+    purchases_products.product_id
+FROM purchases_products
+INNER JOIN purchases
+ON purchase_id = purchases.id
+INNER JOIN products
+ON product_id = products.id;
+--
 
 
 
-
+--------------------------------------------------------------------------------------------
 -- GET ALL USERS
 SELECT * FROM users
 ORDER BY email ASC;
@@ -128,3 +157,13 @@ WHERE id = "u001";
 UPDATE products
 SET price = 1000
 WHERE id = "p001"
+
+-- EDIT PURCHASE DELIVERY BY USER ID
+UPDATE purchases
+SET delivered_at = DATETIME()
+WHERE buyer_id = "u001";
+
+-- GET PURCHASES JOIN WITH USERS
+SELECT * FROM users
+INNER JOIN purchases
+ON users.id = buyer_id;
