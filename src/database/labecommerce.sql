@@ -8,11 +8,11 @@ CREATE TABLE users (
 SELECT * FROM users;
 DROP TABLE users;
 
-INSERT INTO users (id, email, password)
+INSERT INTO users (id, name, email, password, createdAt)
 VALUES 
-("u001", "lucas.tavares@email.com", "123"),
-("u002", "leticia.tavares@email.com", "123"),
-("u003", "henrique.tavares@email.com", "123");
+("u001", "Lucas", "lucas.tavares@email.com", "123", DATETIME()),
+("u002", "Leticia", "leticia.tavares@email.com", "122", DATETIME()),
+("u003", "Henrique", "henrique.tavares@email.com", "123", DATETIME());
 
 
 
@@ -167,3 +167,38 @@ WHERE buyer_id = "u001";
 SELECT * FROM users
 INNER JOIN purchases
 ON users.id = buyer_id;
+
+
+
+-----------------------------------------------------------------------------------------------
+-- CONFIGS
+DROP TABLE users;
+DROP TABLE products;
+DROP TABLE purchases;
+DROP TABLE purchases_products;
+
+SELECT * FROM purchases;
+
+-- CREATE
+CREATE TABLE users (
+    id TEXT PRIMARY KEY UNIQUE NOT NULL,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    createdAt TEXT NOT NULL
+);
+CREATE TABLE products (
+    id TEXT PRIMARY KEY UNIQUE NOT NULL,
+    name TEXT NOT NULL,
+    price REAL NOT NULL,
+    description TEXT NOT NULL,
+    imageUrl TEXT NOT NULL
+);
+CREATE TABLE purchases (
+    id TEXT PRIMARY KEY UNIQUE NOT NULL,
+    buyer TEXT NOT NULL,
+    totalPrice REAL NOT NULL,
+    createdAt TEXT NOT NULL,
+    paid INTEGER NOT NULL,
+    FOREIGN KEY (buyer) REFERENCES users(id)
+);
